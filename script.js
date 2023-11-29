@@ -1,77 +1,110 @@
-function charger() {
-    function longueur(nombre, longueur) {
-        var str = nombre.toString();
-        while (str.length < longueur) {
-            str = '0' + str;
-        }
-        return str;
-    }
+function calculer()
+{
+  liste_prix = document.getElementsByClassName("input_prx");
+  liste_quantite = document.getElementsByClassName("input_qte");
+  liste_desc = document.getElementsByClassName("input_desc");
+  liste_tt = document.getElementsByClassName("input_tt");
 
-    var jour = longueur(Math.floor(Math.random() * 31) + 1, 2);
-    var mois = longueur(Math.floor(Math.random() * 12) + 1, 2);
-    var annee = Math.floor(Math.random() * (2023 - 2000 + 1)) + 2000;
+  soustotal = 0;
+  for (var i = 0; i <liste_tt.length-1; i++)
+  {
+    soustotal += Number(liste_tt[i].value);
+  }
 
-    var dateFacture = jour + '/' + mois + '/' + annee;
+document.getElementById("soustotal_container").value = soustotal;
+remise_value = Number(document.getElementById("remise_container").value);
+console.log(`Remise: ${remise_value}`)
 
-    var numeroFacture = longueur(Math.floor(Math.random() * 100000000), 9);
+sous_total_moins_remises = soustotal * ((100 - remise_value) /100).toFixed(2);
+document.getElementById("totalwithremise_container").value = sous_total_moins_remises;
 
-    document.getElementById('date_facture').innerText = dateFacture;
-    document.getElementById('numero_facture').innerText = numeroFacture;
+console.log(`Sous total moins remise: ${sous_total_moins_remises}`);
+tauximposition = Number(document.getElementById("tauximposition_container").value);
+console.log(`Taux d'imposition: ${tauximposition}`)
+
+taxe_totale = (soustotal * (tauximposition) / 100).toFixed(2);
+document.getElementById("taxetotal_container").value = taxe_totale;
+console.log(`taxe total: ${taxe_totale}`)
+
+frais_expedition = Number(document.getElementById("fraisexpedition_container").value);
+console.log(`Frais d'éxpéditions: ${frais_expedition}`)
+
+solde_ttc = (Number(sous_total_moins_remises) + Number(taxe_totale) + Number(frais_expedition)).toFixed(2);
+document.getElementById("solde_container").value = solde_ttc;
+console.log(`taxe ttc: ${solde_ttc}`);
+}
+function cancel()
+{
+  window.location.reload()
+}
+function ajouter()
+{
+  tableau = document.getElementById("tableau_facture");
+  row_index = tableau.rows.length -1;
+  new_line = tableau.insertRow(row_index);
+
+  console.log(new_line.id)
+  cell_desc = new_line.insertCell(0);
+  cell_desc.className = "right_line desc";
+  cell_quantite = new_line.insertCell(1);
+  cell_quantite.className = "right_line qte";
+  cell_prix = new_line.insertCell(2);
+  cell_prix.className = "right_line prx";
+  cell_total = new_line.insertCell(3);
+  cell_total.className = "right_line tt";
+
+  cell_desc.innerHTML = "<input type='text' class='input_desc' value=''> ";
+  cell_desc.getElementsByClassName("input_desc")[0].value = document.getElementById("description").value;
+  cell_quantite.innerHTML = "<input type='number' class='input_qte'>";
+  cell_quantite.getElementsByClassName("input_qte")[0].value = document.getElementById("quantite").value;
+  cell_prix.innerHTML = "<input type='number' class='input_prx'>";
+  cell_prix.getElementsByClassName("input_prx")[0].value = document.getElementById("prix").value;
+  cell_total.innerHTML = "<input type='number' class='input_tt' readonly>";
+  cell_total.getElementsByClassName("input_tt")[0].value = (Number(document.getElementById("quantite").value) * Number(document.getElementById("prix").value)).toFixed(2);
+
+  if (tableau.rows.length % 2 == 0)
+  {
+    new_line.className = "color2";
+    cell_desc.getElementsByClassName("input_desc")[0].className = " input_desc color2";
+    cell_quantite.getElementsByClassName("input_qte")[0].className = "input_qte color2";
+    cell_prix.getElementsByClassName("input_prx")[0].className = "input_prx color2";
+    cell_total.getElementsByClassName("input_tt")[0].className = "input_tt color2";
+
+  }
+  else
+  {
+    new_line.className = "color1";
+    cell_desc.getElementsByClassName("input_desc")[0].className = "input_desc color1";
+    cell_quantite.getElementsByClassName("input_qte")[0].className = "input_qte color1";
+    cell_prix.getElementsByClassName("input_prx")[0].className = "input_prx color1";
+    cell_total.getElementsByClassName("input_tt")[0].className = "input_tt color1";
+  }
+
+}
+function fill()
+{
+  const table_desc = Array("iphone", "samsung phone", "xioami trotinette", "fan rgb", "disque dur externe", "appareil photo", "tablette graphique avec écran", "pc fixe", "batterie externe",);
+  liste_prix = document.getElementsByClassName("input_prx");
+
+  liste_quantite = document.getElementsByClassName("input_qte");
+  liste_desc = document.getElementsByClassName("input_desc");
+  liste_tt = document.getElementsByClassName("input_tt");
+
+
+
+
+  for (var i = 0; i <liste_desc.length - 1; i++)
+  {
+    var idesc = Math.floor(table_desc.length * Math.random());
+    liste_desc[i].value = table_desc[idesc];
+
+    var qte = Math.floor(10 * Math.random()+1);
+    var prx = Math.floor(100 * Math.random()+1)
+    liste_quantite[i].value = qte;
+    liste_prix[i].value = prx;
+    liste_tt[i].value = qte * prx;
+
+  }
+
 }
 
-function ajouterLigne() {
-    var lastRow = document.getElementById('tbody').rows.length - 1;
-    var templateRow = document.getElementById('modeleLigne');
-    var newRow = templateRow.cloneNode(true);
-
-    document.getElementById('tbody').insertBefore(newRow, document.getElementById('lastLigne'));
-}
-
-function Calculer() {
-    var total = 0;
-
-    var listePrix = document.getElementsByClassName("prix");
-    var listQuantite = document.getElementsByClassName("quantite");
-    var listeTotal = document.getElementsByClassName("total");
-
-    var remise = parseFloat(document.getElementById("remise").value) || 0;
-    var imposition = parseFloat(document.getElementById("taxe").value) || 0;
-    var expedition = parseFloat(document.getElementById("expedition").value) || 0;
-
-    for (var i = 0; i < listePrix.length; i++) {
-        var totalLigne = parseFloat(listQuantite[i].value) * parseFloat(listePrix[i].value);
-        listeTotal[i].innerText = totalLigne.toFixed(2);
-        total += totalLigne;
-    }
-
-    var sous_total = total;
-    document.getElementById("sous_total").innerText = sous_total.toFixed(2) + " €";
-
-    var sous_total_remise = (sous_total - remise);
-    document.getElementById("sous_total_remise").innerText = sous_total_remise.toFixed(2) + " €";
-
-    var taxe_total = (sous_total * (imposition / 100));
-    document.getElementById("taxe_total").innerHTML = taxe_total.toFixed(2);
-
-    var solde_total = sous_total + taxe_total + expedition;
-    document.getElementById("solde_total").innerHTML = solde_total.toFixed(2);
-}
-
-function genererContenu() {
-    var tabDesc = ["Product A", "Product B", "Product C", "Product D"];
-    var tbody = document.getElementById("tbody");
-    var rows = tbody.getElementsByTagName("tr");
-
-    for (var i = 0; i < rows.length; i++) {
-        var row = rows[i];
-        var cells = row.getElementsByTagName("td");
-
-        const quantite = Math.floor(50 * Math.random() + 1);
-        const prix = (Math.floor(10000 * Math.random() + 1) / 100).toFixed(2);
-
-        cells[0].getElementsByTagName("input")[0].value = tabDesc[Math.floor(Math.random() * tabDesc.length)];
-        cells[1].getElementsByTagName("input")[0].value = quantite;
-        cells[2].getElementsByTagName("input")[0].value = prix;
-    }
-    Calculer();
-}
