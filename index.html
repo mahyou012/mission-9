@@ -2,85 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Facture</title>
+    <link rel='stylesheet' type='text/css' media='screen' href='mission9.css'>
+    <script src='mission9.js'></script>
+    <title>Mission 9</title>
 </head>
-<body onload="charger()">
-    <div class="page">
-        <header>
-            <div class="entreprise-info">
-                
-                <h2>jeuretogaming</h2>
-                <p>85 rue de la ville</p>
-                <p>Numéro de téléphone: 07 05 06 08 09</p>
-                <p>Email: jeuretogaming@gmail.com</p>
-            </div>
-            <div class="facture-info">
-                <h1>Facture</h1>
-                <p>Date: <span id="date_facture">[Date]</span></p>
-                <p>Numéro de Facture: <span id="numero_facture">[Numéro]</span></p>
-            </div>
-        </header>
-
-        <section id="facture-details">
-            <div id="destinataire">
-                <h2>Destinataire</h2>
-                <p>mahamoud youssouf</p>
-              <p>85 rue de la ville</p>
-                <p>Numéro de téléphone: 07 05 06 08 09</p>
-                <p>Email: jeuretogaming@gmail.com</p>
-            </div>
-            <div id="envoie">
-                <h2>Envoyez à</h2>
-                <p>dimitri du laboratoire</p>
-                <p>80 Rue de Versailles BP112, 91305 Massy</p>
-                <p>Numéro de téléphone: 0169537400</p>
-                <p>Email:Turbo.0910727w@ac-versailles.fr</p>
-            </div>
-        </section>
-
-        <table id="facture-tableau">
-            <thead>
-                <tr>
-                    <th>Nom de l'article</th>
-                    <th>Quantité</th>
-                    <th>Prix unitaire</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="tbody">
-                <tr id="modeleLigne" class="tr">
-                    <td><input type="text" class="nom" value="Article 1"></td>
-                    <td><input type="number" class="quantite" value="2"></td>
-                    <td><input type="number" class="prix" value="00.00"></td>
-                    <td><span class="total">00.00</span></td>
-                </tr>
-                <tr id="lastLigne">
-                    <td><input type="text" class="nom" value="Article 2"></td>
-                    <td><input type="number" class="quantite" value="1"></td>
-                    <td><input type="number" class="prix" value="00.00"></td>
-                    <td><span class="total">00.00</span></td>
-                </tr>
-            </tbody>
+<body>
+    <header>
+    <img class="img" src="photo.jpg">
+    <h1>Nom de la companie</h1>
+    <h3>adresse postale</h3>
+    <h2>détail du contract</h2>
+    </header>
+    <br>
+    <h4>Condition de paiement, par exemple: dû dans X jours</h4>
+    <br>
+    <div>
+        <table class="des">
+            <tr>
+                <td><h3>Destinataire</h3></td> 
+            </tr>
+            <tr>
+                <td><h4>Nom</h4></td> 
+            </tr>
+            <tr>
+                <td><h4>Nom de la société</h4></td> 
+            </tr>
+            <tr>
+                <td><h4>Adresse postale</h4></td> 
+            </tr>
+            <tr>
+                <td><h4>Téléphone</h4></td> 
+            </tr>
+            <tr>
+                <td><h4>Email</h4></td> 
+            </tr>
+    </table>
+    
+    <table class="en">
+        <tr>
+            <td><h3>Envoyer à</h3></td>
+        <tr>
+            <td><h4>Nom</h4></td>
+        </tr>
+        <tr>
+            <td><h4>Nom de la société</h4></td>
+        </tr>
+        <tr>
+            <td><h4>Adresse postale</h4></td>
+        </tr>
+        <tr>
+            <td><h4>Téléphone</h4></td> 
+        </tr>
+        <tr>
+            <td><h4>Email</h4></td>
+        </tr>
+    </table>
+    </div>
+    <div class="fiche">
+        <table id="tableau_facture">
+            <tr>
+                <th  style="width: 53%;">DESCRIPTION</th> <th  style="width: 20%;">quantite</th> <th  style="width: 20%;">prix unitaire</th><th style="width: 20%;">total</th>
+            </tr>
+            <tr>
+                <td class="right_line desc"><input type="text" class="input_desc color1" value="Obj1" width="100%"></td>
+                <td class="right_line qte"><input type="number" class="input_qte color1" value="0" width="100%"></td>
+                <td class="right_line prx"><input type="number" class="input_prx color1" value="0" width="100%"></td>
+                <td class="right_line tt"><input type="number" class="input_tt color1" readonly value="0" width="100%"></td>            </tr>
+            <tr>
+                <td class="right_line desc"><input type="text" class="input_desc color2" value="Obj2"></td>
+            <td class="right_line qte"><input type="number" class="input_qte color2" value="10"></td>
+            <td class="right_line prx"><input type="number" class="input_prx color2" value="27"></td>
+            <td class="right_line tt"><input type="number" class="input_tt color2" readonly value="270"></td>
+            </tr>
+            <tr>
+                <td class="right_line desc"><input type="text" class="input_desc color1" value="Obj3"></td>
+                <td class="right_line qte"><input type="number" class="input_qte color1" value="4"></td>
+                <td class="right_line prx"><input type="number" class="input_prx color1" value="33.33"></td>
+                <td class="right_line tt"><input type="number" class="input_tt color1" readonly value="134"></td>         
+            </tr>
+            <tr>
+                <td class="right_line desc"><input type="text" class="input_desc color2" value="Obj4"></td>
+                <td class="right_line qte"><input type="number" class="input_qte color2" value="1"></td>
+                <td class="right_line prx"><input type="number" class="input_prx color2" value="299.99"></td>
+                <td class="right_line tt"><input type="number" class="input_tt color2" readonly value="270"></td>
+            </tr>
+            <tr>
+                <td ><input type="text"   style="width: 100%;" id="description"></td>  <td ><input type="number" style="width: 100%;" id="quantite"></td>  <td ><input type="number"  style="width: 100%;" id="prix"></td>  <td ><input type="text"  style="width: 100%;" id="total" readonly></td>
+            </tr>
         </table>
-
-        <div id="totals">
-            <p>Sous-total : <span id="sous_total">0.0</span></p>
-            <p>Remise : <input type="text" value="0.0" id="remise"></p>
-            <p>Sous-total moins remise : <span id="sous_total_remise">0.0</span></p>
-            <p>Taux d'imposition : <input type="text" value="10" id="taxe">%</p>
-            <p>Taxe totale : <span id="taxe_total">0.0</span></p>
-            <p>Expédition manutention : <input type="text" value="0.0" id="expedition"></p>
-            <h3>Solde total : <span id="solde_total">0.0</span></h3>
-        </div>
-
-        <div id="boutons">
-            <button onclick="Calculer()">Calculer</button>
-            <button onclick="ajouterLigne()">Ajouter une ligne</button>
-            <button type="reset">Annuler</button>
+        <button onclick="calculer()" >calculer</button>
+        <button onclick="ajouter()" >ajouter une ligne</button>
+        <button onclick="fill()" >remplir automatiquement</button>
+        <button onclick="cancel()" >annuler</button>
+        <br><br>
+        <div id="div_value">
+            <label>Sous total : </label> <input id="soustotal_container" class="droite" type="text" readonly> <br>
+            <label>Remise : </label> <input id="remise_container" type="text" class="droite" value="10"> <br>
+            <label >Sous total Moins les remises : </label> <input id="totalwithremise_container" type="text" class="droite" readonly> <br>
+            <label>Taux d'imposition : </label> <input id="tauximposition_container" type="text" class="droite" value="10"> <br>
+            <label>Taxes totales : </label> <input id="taxetotal_container" type="text" class="droite" readonly> <br>
+            <label >Frais d'expedition | Manutention : </label> <input id="fraisexpedition_container" type="text" class="droite" value="5"> <br>
+            <hr>
         </div>
     </div>
+    <footer></footer>
 </body>
 </html>
